@@ -6,39 +6,28 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 export const metadata: Metadata = {
-  title: "Next.js SignIn Page | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js Signin Page TailAdmin Dashboard Template",
+  title: "MAMDA-MCMA | Sign In",
 };
 
 const SignIn: React.FC = () => {
   return (
-    <DefaultLayout>
-      <Breadcrumb pageName="Sign In" />
-
+    <DefaultLayout hideNavAndSidebar>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
-              <Link className="mb-5.5 inline-block" href="/">
-                <Image
-                  className="hidden dark:block"
-                  src={"/images/logo/logo.svg"}
-                  alt="Logo"
-                  width={176}
-                  height={32}
-                />
+              <div className="mb-5.5 inline-block">
                 <Image
                   className="dark:hidden"
-                  src={"/images/logo/logo-dark.svg"}
+                  src={"/images/logo/logo.png"}
                   alt="Logo"
                   width={176}
                   height={32}
                 />
-              </Link>
+              </div>
 
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+              Bienvenue sur la plateforme de gestion des demandes et de gestion des stocks de <strong>Mamda-MCMA</strong>.
               </p>
 
               <span className="mt-15 inline-block">
