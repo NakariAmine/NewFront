@@ -94,7 +94,7 @@ interface DropdownUserProps {
                     fill=""
                   />
                 </svg>
-                Account Settings
+                Parametres du compte
               </Link>
             </li>
           </ul>
@@ -116,7 +116,7 @@ interface DropdownUserProps {
                 fill=""
               />
             </svg>
-            Log Out
+            Se Deconnecter
           </button>
         </div>
       )}

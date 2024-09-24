@@ -1,273 +1,356 @@
+"use client";
+import { useState } from "react";
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Button,
+  HStack,
+  Box,
+  Heading,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerCloseButton,
+  useDisclosure,
+  Select,
+  VStack,
+} from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons"; // Import the DeleteIcon
+import { IconButton } from "@chakra-ui/react"; // Import the IconButton
 
 const Calendar = () => {
-  return (
-    <div className="mx-auto max-w-7xl">
-      <Breadcrumb pageName="Calendar" />
+  interface Item {
+    itemId: number;
+    name: string;
+    category: string;
+    quantity: number;
+    description: string;
+    image: string;
+    selectedQuantity?: number;
+    totalSelectedQuantity?: number;
+  }
 
-      {/* <!-- ====== Calendar Section Start ====== --> */}
-      <div className="w-full max-w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <table className="w-full">
-          <thead>
-            <tr className="grid grid-cols-7 rounded-t-sm bg-primary text-white">
-              <th className="flex h-15 items-center justify-center rounded-tl-sm p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Sunday </span>
-                <span className="block lg:hidden"> Sun </span>
-              </th>
-              <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Monday </span>
-                <span className="block lg:hidden"> Mon </span>
-              </th>
-              <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Tuesday </span>
-                <span className="block lg:hidden"> Tue </span>
-              </th>
-              <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Wednesday </span>
-                <span className="block lg:hidden"> Wed </span>
-              </th>
-              <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Thursday </span>
-                <span className="block lg:hidden"> Thur </span>
-              </th>
-              <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Friday </span>
-                <span className="block lg:hidden"> Fri </span>
-              </th>
-              <th className="flex h-15 items-center justify-center rounded-tr-sm p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Saturday </span>
-                <span className="block lg:hidden"> Sat </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- Line 1 --> */}
-            <tr className="grid grid-cols-7">
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  1
-                </span>
-                <div className="group h-16 w-full flex-grow cursor-pointer py-1 md:h-30">
-                  <span className="group-hover:text-primary md:hidden">
-                    More
-                  </span>
-                  <div className="event invisible absolute left-2 z-99 mb-1 flex w-[200%] flex-col rounded-sm border-l-[3px] border-primary bg-gray px-3 py-1 text-left opacity-0 group-hover:visible group-hover:opacity-100 dark:bg-meta-4 md:visible md:w-[190%] md:opacity-100">
-                    <span className="event-name text-sm font-semibold text-black dark:text-white">
-                      Redesign Website
-                    </span>
-                    <span className="time text-sm font-medium text-black dark:text-white">
-                      1 Dec - 2 Dec
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  2
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  3
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  4
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  5
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  6
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  7
-                </span>
-              </td>
-            </tr>
-            {/* <!-- Line 1 --> */}
-            {/* <!-- Line 2 --> */}
-            <tr className="grid grid-cols-7">
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  8
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  9
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  10
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  11
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  12
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  13
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  14
-                </span>
-              </td>
-            </tr>
-            {/* <!-- Line 2 --> */}
-            {/* <!-- Line 3 --> */}
-            <tr className="grid grid-cols-7">
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  15
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  16
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  17
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  18
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  19
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  20
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  21
-                </span>
-              </td>
-            </tr>
-            {/* <!-- Line 3 --> */}
-            {/* <!-- Line 4 --> */}
-            <tr className="grid grid-cols-7">
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  22
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  23
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  24
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  25
-                </span>
-                <div className="group h-16 w-full flex-grow cursor-pointer py-1 md:h-30">
-                  <span className="group-hover:text-primary md:hidden">
-                    More
-                  </span>
-                  <div className="event invisible absolute left-2 z-99 mb-1 flex w-[300%] flex-col rounded-sm border-l-[3px] border-primary bg-gray px-3 py-1 text-left opacity-0 group-hover:visible group-hover:opacity-100 dark:bg-meta-4 md:visible md:w-[290%] md:opacity-100">
-                    <span className="event-name text-sm font-semibold text-black dark:text-white">
-                      App Design
-                    </span>
-                    <span className="time text-sm font-medium text-black dark:text-white">
-                      25 Dec - 27 Dec
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  26
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  27
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  28
-                </span>
-              </td>
-            </tr>
-            {/* <!-- Line 4 --> */}
-            {/* <!-- Line 5 --> */}
-            <tr className="grid grid-cols-7">
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  29
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  30
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  31
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  1
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  2
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  3
-                </span>
-              </td>
-              <td className="ease relative h-20 cursor-pointer border border-stroke p-2 transition duration-500 hover:bg-gray dark:border-strokedark dark:hover:bg-meta-4 md:h-25 md:p-6 xl:h-31">
-                <span className="font-medium text-black dark:text-white">
-                  4
-                </span>
-              </td>
-            </tr>
-            {/* <!-- Line 5 --> */}
-          </tbody>
-        </table>
-      </div>
-      {/* <!-- ====== Calendar Section End ====== --> */}
-    </div>
-  );
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook to manage drawer state
+
+  const mockItems: Item[] = [
+    {
+      itemId: 1,
+      name: "Laptop",
+      category: "Electronics",
+      quantity: 50,
+      description: "A high-performance laptop suitable for all your computing needs.",
+      image: "laptop.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 2,
+      name: "Office Chair",
+      category: "Furniture",
+      quantity: 30,
+      description: "Ergonomic office chair with lumbar support.",
+      image: "office-chair.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 3,
+      name: "Wireless Mouse",
+      category: "Electronics",
+      quantity: 100,
+      description: "A smooth and responsive wireless mouse.",
+      image: "wireless-mouse.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 4,
+      name: "Notebook",
+      category: "Stationery",
+      quantity: 200,
+      description: "A set of 5 ruled notebooks.",
+      image: "notebook.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 5,
+      name: "Desk Lamp",
+      category: "Furniture",
+      quantity: 60,
+      description: "LED desk lamp with adjustable brightness.",
+      image: "desk-lamp.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0},
+    {
+      itemId: 6,
+      name: "Projector",
+      category: "Electronics",
+      quantity: 20,
+      description: "HD projector for presentations and movies.",
+      image: "projector.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    }
+  ];
+
+  const [items, setItems] = useState<Item[]>(mockItems);
+
+  const incrementQuantity = (itemId: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.itemId === itemId && item.selectedQuantity! < item.quantity) {
+          const updatedItem = { ...item, selectedQuantity: (item.selectedQuantity || 0) + 1 };
+          console.log(`Incremented: ${updatedItem.name}, Selected Quantity: ${updatedItem.selectedQuantity}`);
+          return updatedItem;
+        }
+        return item;
+      })
+    );
+  };
+
+  const setTotalQuantityToZero = (itemId: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.itemId === itemId
+          ? { ...item, totalSelectedQuantity: 0 }
+          : item
+      )
+    );
+  };
+  
+  const decrementQuantity = (itemId: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.itemId === itemId && (item.selectedQuantity || 0) > 0) {
+          const updatedItem = { ...item, selectedQuantity: (item.selectedQuantity || 0) - 1 };
+          console.log(`Decremented: ${updatedItem.name}, Selected Quantity: ${updatedItem.selectedQuantity}`);
+          return updatedItem;
+        }
+        return item;
+      })
+    );
+  };
+
+  const decrementTotalQuantity = (itemId: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.itemId === itemId && (item.totalSelectedQuantity || 0) > 0) {
+          const updatedItem = { ...item, totalSelectedQuantity: (item.totalSelectedQuantity || 0) - 1 };
+          console.log(`Decremented: ${updatedItem.name}, Total Selected Quantity: ${updatedItem.totalSelectedQuantity}`);
+          return updatedItem;
+        }
+        return item;
+      })
+    );
+  }
+
+  const incrementTotalQuantity = (itemId: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.itemId === itemId && item.totalSelectedQuantity! < item.quantity) {
+          const updatedItem = { ...item, totalSelectedQuantity: (item.totalSelectedQuantity || 0) + 1 };
+          console.log(`Incremented: ${updatedItem.name}, Total Selected Quantity: ${updatedItem.totalSelectedQuantity}`);
+          return updatedItem;
+        }
+        return item;
+      })
+    );
+  }
+
+  const addToCart = (itemId: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.itemId === itemId) {
+          const updatedItem = { ...item, totalSelectedQuantity: (item.totalSelectedQuantity || 0) + (item.selectedQuantity || 0) };
+          console.log(`Added to cart: ${updatedItem.name}, Total Selected Quantity: ${updatedItem.totalSelectedQuantity}`);
+          return updatedItem;
+        }
+        return item;
+      })
+    );
+  } 
+
+  const selectedItems = items.filter(item => item.selectedQuantity! > 0);
+
+const categories = ["Moyens Generaux", "Informatique"];
+const families = ["Family 1", "Family 2", "Family 3"];
+const subFamilies = ["Sub-family 1", "Sub-family 2", "Sub-family 3"];
+
+const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
+const [selectedFamily, setSelectedFamily] = useState<string | undefined>(undefined);
+const [selectedSubFamily, setSelectedSubFamily] = useState<string | undefined>(undefined);
+
+return (
+  <div className="mx-auto max-w-7xl" style={{ position: 'relative' }}>
+    <Breadcrumb pageName="Creer une nouvelle demande" />
+
+    <HStack spacing={4} align="stretch" mb={4}>
+      <VStack align="start">
+        <Heading size="small">Categorie:</Heading>
+        <Select placeholder="" onChange={(e) => setSelectedCategory(e.target.value)} size="sm" width="200px">
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </Select>
+      </VStack>
+      <VStack align="start">
+        <Heading size="small">Famille:</Heading>
+        <Select placeholder="" onChange={(e) => setSelectedFamily(e.target.value)} size="sm" width="200px">
+          {families.map((family, index) => (
+            <option key={index} value={family}>
+              {family}
+            </option>
+          ))}
+        </Select>
+      </VStack>
+      <VStack align="start">
+        <Heading size="small">Sous-Famille:</Heading>
+        <Select placeholder="" onChange={(e) => setSelectedSubFamily(e.target.value)} size="sm" width="200px">
+          {subFamilies.map((subFamily, index) => (
+            <option key={index} value={subFamily}>
+              {subFamily}
+            </option>
+          ))}
+        </Select>
+      </VStack>
+      <Box >
+        <Button onClick={onOpen} size="sm" top="30px">
+          Rechercher
+        </Button>
+      </Box>
+    </HStack>
+
+    <Box position="absolute" top="10px" right="10px">
+      <Button onClick={onOpen} size="sm">
+        Afficher les articles sélectionnés
+      </Button>
+    </Box>
+
+    <TableContainer>
+      <Table variant="simple">
+        <TableCaption>Articles disponibles pour la demande</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>Nom</Th>
+            <Th>Description</Th>
+            <Th>Quantité</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {items.map((item) => (
+            <Tr key={item.itemId}>
+              <Td>{item.name}</Td>
+              <Td>{item.description}</Td>
+              <Td>
+                <HStack spacing={4}>
+                  <Button
+                    onClick={() => decrementQuantity(item.itemId)}
+                    size="sm"
+                  >
+                    -
+                  </Button>
+                  <span>{item.selectedQuantity}</span>
+                  <Button
+                    onClick={() => incrementQuantity(item.itemId)}
+                    size="sm"
+                  >
+                    +
+                  </Button>
+                </HStack>
+              </Td>
+              <Td>
+                <Button
+                  onClick={() => addToCart(item.itemId)}
+                  size="sm"
+                >
+                  Ajouter
+                </Button>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
+
+    <Drawer
+      isOpen={isOpen}
+      placement="right"
+      onClose={onClose}
+      size="sm"
+    >
+      <DrawerOverlay />
+      <DrawerContent>
+      <DrawerCloseButton />
+      <DrawerHeader>Articles sélectionnés</DrawerHeader>
+      <DrawerBody>
+        {selectedItems.filter(item => item.totalSelectedQuantity! > 0).length > 0 ? (
+        <TableContainer>
+          <Table variant="simple">
+          <Thead>
+            <Tr>
+            <Th>Nom</Th>
+            <Th>Quantité Totale</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {selectedItems.filter(item => item.totalSelectedQuantity! > 0).map((item) => (
+            <Tr key={item.itemId}>
+              <Td>{item.name}</Td>
+              <Td>
+              <HStack spacing={4} justifyContent="space-between">
+                <HStack spacing={4}>
+                <Button
+                  onClick={() => decrementTotalQuantity(item.itemId)}
+                  size="sm"
+                >
+                  -
+                </Button>
+                <span>{item.totalSelectedQuantity}</span>
+                <Button
+                  onClick={() => incrementTotalQuantity(item.itemId)}
+                  size="sm"
+                >
+                  +
+                </Button>
+                </HStack>
+                <IconButton
+                aria-label="Remove item"
+                icon={<DeleteIcon />}
+                size="sm"
+                onClick={() => setTotalQuantityToZero(item.itemId)}
+                />
+              </HStack>
+              </Td>
+            </Tr>
+            ))}
+          </Tbody>
+          </Table>
+        </TableContainer>
+        ) : (
+        <Box>Aucun article selectionné.</Box>
+        )}
+      </DrawerBody>
+      <Box position="absolute" bottom="10px" right="10px">
+        <Button onClick={() => console.log("Creer La Demande")}>
+        Confirmer
+        </Button>
+      </Box>
+      </DrawerContent>
+    </Drawer>
+  </div>
+);
 };
 
 export default Calendar;

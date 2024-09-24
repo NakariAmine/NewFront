@@ -100,11 +100,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Mes Demandes",
-        route: "#",
-        children: [
-          { label: "Demandes Envoyees", route: "/forms/form-elements" },
-          { label: "Demandes En Cours", route: "/forms/form-layout" },
-        ],
+        route: "/tables",
       },
     ],
   },
