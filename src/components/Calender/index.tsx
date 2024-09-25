@@ -37,6 +37,8 @@ const Calendar = () => {
     image: string;
     selectedQuantity?: number;
     totalSelectedQuantity?: number;
+    famille?:string;
+    sousfamille?:string;
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook to manage drawer state
@@ -44,64 +46,150 @@ const Calendar = () => {
   const mockItems: Item[] = [
     {
       itemId: 1,
-      name: "Laptop",
-      category: "Electronics",
+      name: "Ordinateur Portable",
+      category: "Informatique",
+      famille: "Électronique",
+      sousfamille: "Ordinateurs",
       quantity: 50,
-      description: "A high-performance laptop suitable for all your computing needs.",
+      description: "Un ordinateur portable haute performance pour tous vos besoins informatiques.",
       image: "laptop.jpg",
       selectedQuantity: 0,
       totalSelectedQuantity: 0,
     },
     {
       itemId: 2,
-      name: "Office Chair",
-      category: "Furniture",
+      name: "Chaise de Bureau",
+      category: "Moyens Generaux",
+      famille: "Mobilier",
+      sousfamille: "Chaises",
       quantity: 30,
-      description: "Ergonomic office chair with lumbar support.",
+      description: "Chaise de bureau ergonomique avec soutien lombaire.",
       image: "office-chair.jpg",
       selectedQuantity: 0,
       totalSelectedQuantity: 0,
     },
     {
       itemId: 3,
-      name: "Wireless Mouse",
-      category: "Electronics",
+      name: "Souris Sans Fil",
+      category: "Informatique",
+      famille: "Périphériques",
+      sousfamille: "Souris",
       quantity: 100,
-      description: "A smooth and responsive wireless mouse.",
+      description: "Une souris sans fil fluide et réactive.",
       image: "wireless-mouse.jpg",
       selectedQuantity: 0,
       totalSelectedQuantity: 0,
     },
     {
       itemId: 4,
-      name: "Notebook",
-      category: "Stationery",
+      name: "Cahier",
+      category: "Moyens Generaux",
+      famille: "Papeterie",
+      sousfamille: "Cahiers",
       quantity: 200,
-      description: "A set of 5 ruled notebooks.",
+      description: "Un ensemble de 5 cahiers à lignes.",
       image: "notebook.jpg",
       selectedQuantity: 0,
       totalSelectedQuantity: 0,
     },
     {
       itemId: 5,
-      name: "Desk Lamp",
-      category: "Furniture",
+      name: "Lampe de Bureau",
+      category: "Moyens Generaux",
+      famille: "Mobilier",
+      sousfamille: "Tables",
       quantity: 60,
-      description: "LED desk lamp with adjustable brightness.",
+      description: "Lampe de bureau LED avec luminosité réglable.",
       image: "desk-lamp.jpg",
       selectedQuantity: 0,
-      totalSelectedQuantity: 0},
+      totalSelectedQuantity: 0,
+    },
     {
       itemId: 6,
-      name: "Projector",
-      category: "Electronics",
+      name: "Projecteur",
+      category: "Informatique",
+      famille: "Électronique",
+      sousfamille: "Projecteurs",
       quantity: 20,
-      description: "HD projector for presentations and movies.",
+      description: "Projecteur HD pour présentations et films.",
       image: "projector.jpg",
       selectedQuantity: 0,
       totalSelectedQuantity: 0,
-    }
+    },
+    {
+      itemId: 7,
+      name: "Clavier Mécanique",
+      category: "Informatique",
+      famille: "Périphériques",
+      sousfamille: "Claviers",
+      quantity: 75,
+      description: "Clavier mécanique avec rétroéclairage RGB.",
+      image: "keyboard.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 8,
+      name: "Imprimante Multifonction",
+      category: "Informatique",
+      famille: "Électronique",
+      sousfamille: "Ordinateurs",
+      quantity: 15,
+      description: "Imprimante multifonction avec scanner intégré.",
+      image: "printer.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 9,
+      name: "Armoire de Rangement",
+      category: "Moyens Generaux",
+      famille: "Mobilier",
+      sousfamille: "Tables",
+      quantity: 25,
+      description: "Armoire de rangement en métal avec serrure.",
+      image: "storage-cabinet.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 10,
+      name: "Stylo à Bille",
+      category: "Moyens Generaux",
+      famille: "Papeterie",
+      sousfamille: "Stylos",
+      quantity: 500,
+      description: "Un ensemble de 10 stylos à bille noirs.",
+      image: "pen.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 11,
+      name: "Table de Réunion",
+      category: "Moyens Generaux",
+      famille: "Mobilier",
+      sousfamille: "Tables",
+      quantity: 10,
+      description: "Table de réunion en bois pour 8 personnes.",
+      image: "conference-table.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
+    {
+      itemId: 12,
+      name: "Téléphone de Bureau",
+      category: "Informatique",
+      famille: "Périphériques",
+      sousfamille: "Souris",
+      quantity: 40,
+      description: "Téléphone de bureau avec affichage numérique.",
+      image: "office-phone.jpg",
+      selectedQuantity: 0,
+      totalSelectedQuantity: 0,
+    },
   ];
+  
 
   const [items, setItems] = useState<Item[]>(mockItems);
 
@@ -182,13 +270,16 @@ const Calendar = () => {
 
   const selectedItems = items.filter(item => item.selectedQuantity! > 0);
 
-const categories = ["Moyens Generaux", "Informatique"];
-const families = ["Family 1", "Family 2", "Family 3"];
-const subFamilies = ["Sub-family 1", "Sub-family 2", "Sub-family 3"];
+  const categories = ["Moyens Generaux", "Informatique"];
+  const families = [ "Mobilier", "Papeterie","Électronique", "Périphériques"];
 
-const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
-const [selectedFamily, setSelectedFamily] = useState<string | undefined>(undefined);
+  const subFamilies = ["Chaises", "Tables", "Stylos", "Cahiers","Ordinateurs", "Projecteurs", "Souris", "Claviers" ];
+ 
+
+
 const [selectedSubFamily, setSelectedSubFamily] = useState<string | undefined>(undefined);
+const [selectedFamily, setSelectedFamily] = useState<string | undefined>(undefined);
+const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
 
 return (
   <div className="mx-auto max-w-7xl" style={{ position: 'relative' }}>
@@ -226,7 +317,7 @@ return (
         </Select>
       </VStack>
       <Box >
-        <Button onClick={onOpen} size="sm" top="30px">
+        <Button onClick={()=> console.log("hamid")} size="sm" top="30px">
           Rechercher
         </Button>
       </Box>

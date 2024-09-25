@@ -50,7 +50,7 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["M", "T", "W", "T", "F", "S", "S"],
+    categories: ["Ordinateurs portables", "Porte-stylos", "Cartouches", "Cahiers", "Bureaux"],
   },
   legend: {
     position: "top",
@@ -78,12 +78,8 @@ interface ChartTwoState {
 const ChartTwo: React.FC = () => {
   const series = [
     {
-      name: "Sales",
-      data: [44, 55, 41, 67, 22, 43, 65],
-    },
-    {
-      name: "Revenue",
-      data: [13, 23, 20, 8, 13, 27, 15],
+      name: "Quantité Demandée",
+      data: [10, 20, 15, 25, 5], // Example quantities
     },
   ];
 
@@ -92,7 +88,7 @@ const ChartTwo: React.FC = () => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Profit this week
+            Quantité des articles demandés
           </h4>
         </div>
         <div>
@@ -103,10 +99,10 @@ const ChartTwo: React.FC = () => {
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
               <option value="" className="dark:bg-boxdark">
-                This Week
+                Cette Semaine
               </option>
               <option value="" className="dark:bg-boxdark">
-                Last Week
+                La Semaine Dernière
               </option>
             </select>
             <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2">
